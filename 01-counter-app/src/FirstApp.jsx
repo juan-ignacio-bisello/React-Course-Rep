@@ -8,7 +8,9 @@ export const FirstApp = ( { title, subTitle } ) => {
         // <> funciona como un Fracmento sin la necesidad de hacer la importación
         <>
             <h1>{ title }</h1>
+
             <p>{ subTitle }</p>
+            
             <p>No se </p>
         </>
         
