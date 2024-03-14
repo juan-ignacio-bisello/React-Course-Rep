@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Puebas en FirstApp Debe hacer mach con el snapshot 1`] = `
+<div>
+  <h1>
+    Hola, soy goku.
+  </h1>
+  <p>
+    No hay subtitulo
+  </p>
+  <p>
+    No se 
+  </p>
+</div>
+`;
