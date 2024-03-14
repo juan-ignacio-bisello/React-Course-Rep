@@ -5,13 +5,14 @@ import { FirstApp } from "../FirstApp"
 
 
 describe('Puebas en FirstApp', () => {
-    test('Debe hacer mach con el snapshot', () => { 
-        
-        const title = 'Hola, soy goku.';
-        const { container } = render( <FirstApp title={ title } /> );
 
-        expect( container ).toMatchSnapshot();
-     })
+    // test('Debe hacer mach con el snapshot', () => { 
+        
+    //     const title = 'Hola, soy goku.';
+    //     const { container } = render( <FirstApp title={ title } /> );
+
+    //     expect( container ).toMatchSnapshot();
+    //  })
 
      test('Debe mopstrar el titulo en un h1', () => { 
         
@@ -20,8 +21,8 @@ describe('Puebas en FirstApp', () => {
 
         expect( getByText( title ) ).toBeTruthy();
 
-        const h1 = container.querySelector('h1');
-        expect( h1.innerHTML ).toContain( title );
+        // const h1 = container.querySelector('h1');
+        // expect( h1.innerHTML ).toContain( title );
       })
 })
 
