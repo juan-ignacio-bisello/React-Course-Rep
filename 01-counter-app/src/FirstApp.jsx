@@ -7,7 +7,7 @@ export const FirstApp = ( { title, subTitle } ) => {
     return ( 
         // <> funciona como un Fracmento sin la necesidad de hacer la importación
         <>
-            <h1>{ title }</h1>
+            <div data-testid="test-title"> { title } </div>
 
             <p>{ subTitle }</p>
             
