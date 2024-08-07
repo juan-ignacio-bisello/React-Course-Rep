@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useFetch } from '../hooks';
 
 export const PokemonCard = ({ id, name, sprites }) => {
+
+  const pRef = useRef();
+
+  const [boxSize, setBoxSize] = useState({ width: 0 , height: 0 });
+
+  useLayoutEffect(() => {
+  
+    const { height, width } = pRef.current.getBoundingClientRect();
+    setBoxSize({ height, width });
+  
+  }, [ PokemonCard ])
   return (
-    <section style={{ height: 200 }}>
-        
-        <h2>#{ id } - { name }</h2>
+    <>
+      <section style={{ height: 200, display: 'flex' }}>
 
-        <div>
-            {
-                sprites.map( sprite => (
-                    <img key={ sprite } src={ sprite } alt={ sprite } />
-                ))
-            }
-        </div>
+          <h2 ref={ pRef } >#{ id } - { name }</h2>
 
-    </section>
+          <div>
+              {
+                  sprites.map( sprite => (
+                      <img 
+                        key={ sprite } 
+                        src={ sprite } 
+                        alt={ sprite } 
+                      />
+                  ))
+              }
+          </div>
+
+      </section>
+
+      <code>{ JSON.stringify( boxSize ) }</code>
+    </>
+    
   )
 }
