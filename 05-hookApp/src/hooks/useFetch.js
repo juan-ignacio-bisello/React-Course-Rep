@@ -1,4 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+
+const localCache = {
+    
+}
 
 export const useFetch = ( url ) => {
     const [state, setstate] = useState({
@@ -23,11 +27,22 @@ export const useFetch = ( url ) => {
     }
 
     const getFetch = async() => {
+
+        if( localCache[ url ] ) {
+            console.log('Usando cache');
+            setstate({
+                data: localCache[ url ] ,
+                isLoading: false ,
+                hasError: false ,
+                error: null ,
+            });
+            return;
+        }
         setLoadingState();
 
         const resp = await fetch( url );
         
-        await new Promise( resolve => setTimeout( resolve, 1500) );
+        await new Promise( resolve => setTimeout( resolve, 1000) );
 
         if ( !resp.ok ) {
             setstate({
@@ -48,7 +63,7 @@ export const useFetch = ( url ) => {
         error: null ,
         })
 
-        console.log( { data } );
+        localCache[ url ] = data;
     }
     
 
