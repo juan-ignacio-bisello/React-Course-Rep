@@ -4,21 +4,19 @@ export const TodoAdd = ({ onNewTodo }) => {
     
     const { description, onInputChange, onResetForm } = useForm({
         description: ''
-    })
+    });
 
     const onFormSubmit = ( event ) => {
-
         event.preventDefault();
-        
-        // if ( description.length <= 1 ) return;
-    
+        if ( description.length <= 1 ) return;
+
         const newTodo = {
             id: new Date().getTime(),
             done: false,
             description: description,
         }
 
-        onNewTodo( newTodo );
+        onNewTodo(newTodo);
         onResetForm();
     }
 
@@ -28,6 +26,7 @@ export const TodoAdd = ({ onNewTodo }) => {
             type="text"
             placeholder='Qué hay que hacer?'
             className='form-control'
+            name="description"
             value={ description }
             onChange={ onInputChange }
         />
