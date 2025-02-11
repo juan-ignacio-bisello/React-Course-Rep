@@ -1,5 +1,6 @@
 import { Box } from '@mui/system';
 import { Navbar, SideBar } from '../components';
+import { Toolbar } from '@mui/material';
 
 
 const drawerWidth = 240;
@@ -17,6 +18,8 @@ export const JournalLayout = ({ children }) => {
             component='main'
             sx={{ flexGrow: 1, p: 3 }}
         >
+            <Toolbar />
+            
             { children }
         </Box>
 
