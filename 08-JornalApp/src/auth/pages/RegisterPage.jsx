@@ -1,9 +1,24 @@
-import { Google } from '@mui/icons-material';
 import { Link as RouterLink} from 'react-router-dom';
 import { Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { AuthLayout } from '../layout/AuthLayout';
- 
+import { useForm } from '../../hooks';
+
+const formData = {
+  email: 'juanignaciobisello@hotmail.com',
+  password: '123456',
+  displayName: 'Juan Ignacio Bisello'
+}
+
 export const RegisterPage = () => {
+
+  const { displayName, email, password, onInputChange, formState } = useForm( formData );
+
+  const onSubmit = ( event ) => {
+    event.preventDefault();
+
+    console.log( formState );
+  }
+
   return (
     <AuthLayout title='Registro'>
       <form>
@@ -15,6 +30,10 @@ export const RegisterPage = () => {
                   type="email" 
                   placeholder='correo@google.com' 
                   fullWidth
+                  name='email'
+                  value={ email }
+                  onChange={ onInputChange }
+                  
                 />
               </Grid>
 
@@ -24,6 +43,9 @@ export const RegisterPage = () => {
                   type="text" 
                   placeholder='Tu nombre' 
                   fullWidth
+                  name='displayName'
+                  value={ displayName }
+                  onChange={ onInputChange }
                 />
               </Grid>
     
@@ -33,13 +55,18 @@ export const RegisterPage = () => {
           type="password" 
           placeholder='Contraseña' 
           fullWidth
+          name='password'
+          value={ password }
+          onChange={ onInputChange }
         />
         <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
 
           <Grid item xs={12} sm={6} >
             <Button 
+              type='submit'
               variant='contained' 
               fullWidth
+              onClick={ onSubmit }
             >
               Crear cuenta
             </Button>
