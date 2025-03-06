@@ -9,9 +9,15 @@ const formData = {
   displayName: 'Juan Ignacio Bisello'
 }
 
+const formValidations = {
+  email: [ ( value ) => value.includes('@'), 'debe tener un @' ],
+  password: [ ( value ) => value.length >= 6, 'minimo 6 caracteres' ],
+  displayName: [ ( value ) => value.length >= 1, 'obligatorio' ],
+}
+
 export const RegisterPage = () => {
 
-  const { displayName, email, password, onInputChange, formState } = useForm( formData );
+  const { displayName, email, password, onInputChange, formState, isFormValid, emailValid, passwordValid, displayNameValid } = useForm( formData, formValidations );
 
   const onSubmit = ( event ) => {
     event.preventDefault();
@@ -26,19 +32,6 @@ export const RegisterPage = () => {
 
               <Grid item xs={12} sx={{ mt: 2 }}>
               <TextField 
-                  label="Correo" 
-                  type="email" 
-                  placeholder='correo@google.com' 
-                  fullWidth
-                  name='email'
-                  value={ email }
-                  onChange={ onInputChange }
-                  
-                />
-              </Grid>
-
-              <Grid item xs={12} sx={{ mt: 2 }}>
-              <TextField 
                   label="Nombre completo" 
                   type="text" 
                   placeholder='Tu nombre' 
@@ -46,6 +39,22 @@ export const RegisterPage = () => {
                   name='displayName'
                   value={ displayName }
                   onChange={ onInputChange }
+                  error={ !displayNameValid }
+                  helperText={ 'El nombre es obligatorio' }
+                />
+              </Grid>
+
+              <Grid item xs={12} sx={{ mt: 2 }}>
+              <TextField 
+                  label="Correo" 
+                  type="email" 
+                  placeholder='correo@google.com' 
+                  fullWidth
+                  name='email'
+                  value={ email }
+                  onChange={ onInputChange }
+                  helperText={ 'El mail es obligatorio' }
+                  
                 />
               </Grid>
     
