@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink} from 'react-router-dom';
-import { Button, Grid, Link, TextField, Typography } from '@mui/material';
+import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
 import { StartCreatedUserWithEmailPassword } from '../../store/auth/thunks';
@@ -24,6 +24,9 @@ export const RegisterPage = () => {
   const dispatch = useDispatch();
 
   const [formSubmitted, setFormSubmitted] = useState( false );
+
+  const { status, errorMessage} = useSelector( state => state.auth );
+  const isCheckingAuthentication = useMemo( () => status === 'checking', [ status ] );
 
   const { displayName, email, password, onInputChange, formState, isFormValid, emailValid, passwordValid, displayNameValid } = useForm( formData, formValidations );
 
@@ -85,8 +88,15 @@ export const RegisterPage = () => {
         />
         <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
 
+        <Grid item xs={12} sm={6} display={ !!errorMessage ? '' : 'none'} >
+            <Alert severity='error' sx={{ display: !errorMessage && 'none' }}>
+              { errorMessage } 
+            </Alert>
+          </Grid>
+
           <Grid item xs={12} sm={6} >
             <Button 
+              disabled={ isCheckingAuthentication }
               type='submit'
               variant='contained' 
               fullWidth
