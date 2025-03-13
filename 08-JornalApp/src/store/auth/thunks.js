@@ -1,4 +1,6 @@
 import { loginWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, singWithGoogle } from "../../firebase/providers";
+import { loadNotes } from "../../helpers/loadNotes";
+import { setNote } from "../journal/journalSlice";
 import { checkingCredential, login, logout } from "./authSlice"
 
 
@@ -56,5 +58,16 @@ export const startLogout = () => {
         await logoutFirebase();
 
         dispatch( logout({}) );
+    }
+}
+
+export const startLoadingNotes = () => {
+    return async( dispatch, getState ) => {
+        
+        const { uid } = getState().auth;
+        if ( !uid ) throw new Error('No se encontro el uid del usuario');
+
+        const notes = await loadNotes( uid );
+        dispatch( setNote( notes) );
     }
 }
