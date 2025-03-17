@@ -19,7 +19,7 @@ export const LoginPage = () => {
 
   const dispatch = useDispatch();
 
-  const { email, password, onInputChange } = useForm( formData);
+  const { email, password, onInputChange } = useForm( formData );
 
   const isAuthenticated = useMemo( () => status === 'checking', [ status ] );
 
