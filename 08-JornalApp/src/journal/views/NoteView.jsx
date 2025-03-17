@@ -7,7 +7,7 @@ import 'sweetalert2/src/sweetalert2.scss'
 import { ImageGalery } from "../components";
 import { useForm } from "../../hooks/useForm";
 import { setActiveNote } from "../../store/journal/journalSlice";
-import { StartSaveNote } from "../../store/journal/thunks";
+import { StartSaveNote, startUploadingFiles } from "../../store/journal/thunks";
 
 export const NoteView = () => {
 
@@ -35,8 +35,7 @@ export const NoteView = () => {
     const onFileInputChange = ({ target }) => {
       if ( target.files === 0) return;
 
-      console.log('subiendo...');
-      // dispatch( startUploadingFiles( target.files ) );
+      dispatch( startUploadingFiles( target.files ) );
     }
     
     useEffect(() => {

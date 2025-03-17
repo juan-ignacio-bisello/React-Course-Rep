@@ -1,4 +1,5 @@
 import { FirebaseBD } from "../../firebase/config";
+import { fileUpload } from "../../helpers/fileUpload";
 import { addNewEmptyNote, setActiveNote, savingNewNote, setSaving, updateNote } from "./journalSlice";
 import { collection, doc, setDoc } from 'firebase/firestore/lite';
 
@@ -40,5 +41,15 @@ export const StartSaveNote = () => {
         await setDoc( docRef, noteToFirestore, { merge: true } );
 
         dispatch( updateNote( note ) );
+    }
+}
+
+export const startUploadingFiles = ( files = [] ) => {
+    return async( dispatch ) => {
+        dispatch( setSaving() );
+
+        await fileUpload( files[0] );
+
+        
     }
 }
