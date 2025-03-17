@@ -1,7 +1,7 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SaveOutlined } from "@mui/icons-material";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
+import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import { ImageGalery } from "../components";
@@ -21,6 +21,8 @@ export const NoteView = () => {
         return newDate.toUTCString();
     }, [ date ] )
 
+    const fileInputRef = useRef();
+
     useEffect(() => {
       dispatch( setActiveNote( formState ) );
     
@@ -28,6 +30,13 @@ export const NoteView = () => {
 
     const onSaveNote = () => {
         dispatch( StartSaveNote() );
+    }
+
+    const onFileInputChange = ({ target }) => {
+      if ( target.files === 0) return;
+
+      console.log('subiendo...');
+      // dispatch( startUploadingFiles( target.files ) );
     }
     
     useEffect(() => {
@@ -50,7 +59,24 @@ export const NoteView = () => {
         <Grid item >
             <Typography fontSize={ 39 } fontWeight='light' >{ dateString }</Typography>
         </Grid>
-        <Grid>
+        <Grid item >
+
+          <input
+            type="file"
+            multiple
+            ref={ fileInputRef }
+            onChange={ onFileInputChange }
+            style={{ display: 'none'}}
+          />
+
+          <IconButton 
+            color="primary"
+            disabled={ isSaving }
+            onClick={ () => fileInputRef.current.click( )}
+          >
+            <UploadOutlined />
+          </IconButton>
+
             <Button 
                 disabled={ isSaving }
                 onClick={ onSaveNote }
