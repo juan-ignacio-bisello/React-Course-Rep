@@ -1,7 +1,7 @@
-import { loginWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, singWithGoogle } from "../../firebase/providers";
-import { loadNotes } from "../../helpers/loadNotes";
-import { clearNotesLogout, setNote } from "../journal/journalSlice";
-import { checkingCredential, login, logout } from "./authSlice"
+import { loginWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, singWithGoogle } from '../../firebase/providers';
+import { loadNotes } from '../../helpers/loadNotes';
+import { clearNotesLogout, setNote } from '../journal/journalSlice';
+import { checkingCredential, login, logout } from './authSlice';
 
 
 export const checkingAuthentication = ( email, password ) => {
