@@ -6,29 +6,40 @@ import { getEnvironments } from "../helpers/getEnvironments";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-const env = getEnvironments();
-console.log(env)
+const {
+  VITE_APIKEY,
+  VITE_AUTHDOMAIN,
+  VITE_PROJECTID,
+  VITE_STORAGEBUCKET,
+  VITE_MESSAGINGSENDERID,
+  VITE_APPID,
+  VITE_MEASUREMENTID
+} = getEnvironments();
+
+
 // Dev/Prod
 // Your web app's Firebase configuration
 // const firebaseConfig = {
-//   apiKey: "AIzaSyAUrp2Ctc5mRWmKbLodwjA975Zwz4uYlvA",
-//   authDomain: "react-curso-6c092.firebaseapp.com",
-//   projectId: "react-curso-6c092",
-//   storageBucket: "react-curso-6c092.firebasestorage.app",
-//   messagingSenderId: "69571533703",
-//   appId: "1:69571533703:web:a5bd2db87eb854f0991122"
+//   apiKey: VITE_APIKEY,
+//   authDomain: VITE_AUTHDOMAIN,
+//   projectId: VITE_PROJECTID,
+//   storageBucket: VITE_STORAGEBUCKET,
+//   messagingSenderId: VITE_MESSAGINGSENDERID,
+//   appId: VITE_APPID
 // };
 
 // testing
 const firebaseConfig = {
-  apiKey: "AIzaSyCdZ4LBLoivfzKQ3LT-Pduxt1W2MntoIRc",
-  authDomain: "testing-ecfef.firebaseapp.com",
-  projectId: "testing-ecfef",
-  storageBucket: "testing-ecfef.firebasestorage.app",
-  messagingSenderId: "640766794184",
-  appId: "1:640766794184:web:73c73756faca14d6dd48fd",
-  measurementId: "G-B9T9N9KV8V"
+  apiKey:  VITE_APIKEY,
+  authDomain:  VITE_AUTHDOMAIN,
+  projectId:  VITE_PROJECTID,
+  storageBucket:  VITE_STORAGEBUCKET,
+  messagingSenderId:  VITE_MESSAGINGSENDERID,
+  appId:  VITE_APPID,
+  measurementId: VITE_MEASUREMENTID,
 };
+
+console.log(firebaseConfig)
 
 // Initialize Firebase
 export const FirebaseApp = initializeApp( firebaseConfig );
