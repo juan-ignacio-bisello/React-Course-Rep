@@ -1,6 +1,7 @@
-import { singWithGoogle } from '../../../src/firebase/providers';
+import { loginWithEmailPassword, logoutFirebase, singWithGoogle } from '../../../src/firebase/providers';
 import { checkingCredential, login, logout } from '../../../src/store/auth/authSlice';
-import { checkingAuthentication, startGoogleSignIn } from '../../../src/store/auth/thunks';
+import { checkingAuthentication, startGoogleSignIn, startLoginWithEmailPassword, startLogout } from '../../../src/store/auth/thunks';
+import { clearNotesLogout } from '../../../src/store/journal/journalSlice';
 import { demoUser } from '../../fixture/authFixture';
 
 jest.mock( '../../../src/firebase/providers' );
@@ -38,5 +39,27 @@ describe('Pruebas en thunks', () => {
 
         expect( dispatch ).toHaveBeenCalledWith( checkingCredential() );
         expect( dispatch ).toHaveBeenCalledWith( logout( loginData.errorMessage ) );
+    });
+
+    test('startLoginWithEmailPassword debe llamar checkingCredential y login - exito', async() => { 
+        const loginData = { ok: true, ...demoUser };
+        const formData = { email: demoUser.email, password: '123456' };
+
+        await loginWithEmailPassword.mockResolvedValue( loginData );
+        
+        await startLoginWithEmailPassword( formData )( dispatch );
+
+        expect( dispatch ).toHaveBeenCalledWith( checkingCredential() );
+        expect( dispatch ).toHaveBeenCalledWith( login( loginData ) );
+    });
+
+
+    test('startLogout debe llamar logoutFirebase, clearNotes y logout', async() => { 
+        
+        await startLogout()(dispatch);
+
+        expect( logoutFirebase ).toHaveBeenCalled();
+        expect( dispatch ).toHaveBeenCalledWith( clearNotesLogout() );
+        expect( dispatch ).toHaveBeenCalledWith( logout() );
     });
  })
