@@ -1,4 +1,4 @@
-import { Navbar } from '../components/Navbar';
+import { Navbar, CalendarEvent } from '../';
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { getMessagesES, localizer } from '../../helper';
@@ -45,6 +45,9 @@ export const CalendarPage = () => {
         style={{ height: 'calc( 100vh - 80px )' }}
         messages={ getMessagesES() }
         eventPropGetter={ eventStylrGetter }
+        components={{
+          event: CalendarEvent
+        }}
       />
     </>
   )
