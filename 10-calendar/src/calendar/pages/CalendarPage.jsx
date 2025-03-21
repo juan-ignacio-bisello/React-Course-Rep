@@ -1,4 +1,4 @@
-import { Navbar, CalendarEvent } from '../';
+import { Navbar, CalendarEvent, CalendarModal } from '../';
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { getMessagesES, localizer } from '../../helper';
@@ -70,6 +70,8 @@ export const CalendarPage = () => {
         onSelectEvent={ onSelect }
         onView={ onVisitChanged }
       />
+
+      <CalendarModal />
     </>
   )
 }
