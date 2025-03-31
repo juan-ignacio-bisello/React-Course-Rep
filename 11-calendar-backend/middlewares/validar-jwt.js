@@ -2,7 +2,7 @@ const { response } = require("express");
 const jwt = require('jsonwebtoken');
 
 
-const validarFWT = ( req, res = response, next ) => {
+const validarJWT = ( req, res = response, next ) => {
 
     const token = req.header('x-token');
 
@@ -36,5 +36,5 @@ const validarFWT = ( req, res = response, next ) => {
 }
 
 module.exports = {
-    validarFWT
+    validarJWT
 }
