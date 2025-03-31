@@ -7,7 +7,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const router = Router();
 const { validarCampos } = require('../middlewares/Validar-compos');
-const { crearUsuario, loginUsuario, revalidarToken } = require('../controlers/auth');
+const { crearUsuario, loginUsuario, revalidarToken } = require('../controllers/auth');
 
 
 // router.get('/', ( req, res ) => {
