@@ -3,15 +3,28 @@ const Usuario = require('../models/Usuario');
 
 const crearUsuario = async( req, res = response ) => {
 
+    const { email, password } = req.body;
+
     try {
-        const usuario = new Usuario( req.body );
+
+        let usuario = await Usuario.findOne({ email })
+        
+        if ( usuario ) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'Ya existe ese email'
+            })
+        }
+
+        usuario = new Usuario( req.body );
 
         await usuario.save();
 
         res.status(201).json({
             "ok": true,
-            msg: 'registro',
-        })
+            uid: usuario.id,
+            name: usuario.name
+        });
 
     } catch (error) {
         console.log( error );
@@ -20,7 +33,7 @@ const crearUsuario = async( req, res = response ) => {
             msg: 'Hable con administrador'
         })
     }
-    // const { name, email, password } = req.body;
+    
     
 }
 
