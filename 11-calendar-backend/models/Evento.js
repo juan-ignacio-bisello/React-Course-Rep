@@ -4,10 +4,10 @@ const EventoSchema = Schema({
 
     title: {
         type: String,
-        required: true,
+        required: true
     },
     notes: {
-        type: String
+        type: String,        
     },
     start: {
         type: Date,
@@ -22,12 +22,15 @@ const EventoSchema = Schema({
         ref: 'Usuario',
         required: true
     }
+
 });
 
 EventoSchema.method('toJSON', function() {
     const { __v, _id, ...object } = this.toObject();
     object.id = _id;
     return object;
-})
+});
+
+
 
 module.exports = model('Evento', EventoSchema );
