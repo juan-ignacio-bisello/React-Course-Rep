@@ -10,3 +10,14 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+# Calendar app
+
+## dev
+1. Renombrar el .env.template por .env
+2. hacer los cambios respectivos en las variables de entorno
+
+```
+VITE_API_URL=http://localhost:4000/api
+```
