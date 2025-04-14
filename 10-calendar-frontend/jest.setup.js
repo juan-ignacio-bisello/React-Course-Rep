@@ -13,6 +13,6 @@ require('dotenv').config({
 });
 
 // Realizar el mock completo de las variables de entorno
-jest.mock('./src/helpers/getEnvVariables', () => ({
+jest.mock('./src/helper/getEnvVariables', () => ({
     getEnvVariables: () => ({ ...process.env })
 }));
