@@ -7,6 +7,8 @@ import DatePicker, {registerLocale } from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { es } from 'date-fns/locale/es';
 import { useCalendarStore, useUiStore } from '../../hooks';
+import { getEnvVariables } from '../../helper';
+
 
 registerLocale( 'es', es );
 
@@ -21,8 +23,10 @@ const customStyles = {
   },
 };
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement('#root');
+if ( getEnvVariables().VITE_MODE !== 'test'  ) {
+    Modal.setAppElement('#root');
+}
+
 
 export const CalendarModal = () => {
 
